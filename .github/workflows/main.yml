@@ -6,9 +6,9 @@ on:
 jobs:
   echo-hello-world:
     runs-on:
-      ubuntu:latest
+      labels: latest
     steps:
-    - run : echo"hello world"
+    - run: echo"hello world"
     
     
     
