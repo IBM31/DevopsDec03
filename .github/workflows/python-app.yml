@@ -2,32 +2,32 @@ name: Python application
 
 on:
   push:
-    branches: [main] 
+    branches: [main]  # Trigger the action on push to the main branch
   pull_request:
-    branches: [main]  
+    branches: [main]  # Trigger the action on pull requests to the main branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest  # The action will run on the latest Ubuntu runner
 
     steps:
     - name: Check out the repository
-      uses: actions/checkout@v3  
+      uses: actions/checkout@v3  # Checkout the code from the repo
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'  
+        python-version: '3.9'  # Set the Python version you want to use
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip  # Upgrade pip
-        pip install pytest  
+        pip install pytest  # Install pytest for testing (if applicable)
 
     - name: Run Hello World Script
       run: |
-        python hello.py  
+        python hello.py  # Ensure this path is correct and points to the file location
 
     - name: Run tests
       run: |
-        pytest  
+        pytest  # Run tests (if you have test cases)
