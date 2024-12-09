@@ -6,9 +6,15 @@ on:
 jobs:
   echo-hello-world:
     runs-on:
-      labels: latest
+      ubuntu-latest
     steps:
-    - run: echo"hello world"
+    - run: echo"Hello world"
+  echo-say-good-bye:
+   runs-on:
+    ubuntu-latest
+   steps:
+    - run: echo "Good bye"
+   
     
     
     
