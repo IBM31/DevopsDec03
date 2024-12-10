@@ -4,30 +4,25 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Check out repository
+      uses: actions/checkout@v2
 
-      # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # Specify the version of Node.js you want
 
-      # Install dependencies
-      - name: Install dependencies
-        run: |
-          cd app  # Navigate to the correct folder (adjust path)
-          npm install
+    - name: Install dependencies
+      run: npm install
 
-      # Run tests
-      - name: Run tests
-        run: |
-          cd app  # Ensure you're in the correct folder
-          npm test
+    - name: Run tests
+      run: npm test
