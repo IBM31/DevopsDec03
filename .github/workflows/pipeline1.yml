@@ -1,0 +1,17 @@
+name: First Workflow
+on:
+ push:
+
+ workflow_dispatch:
+
+jobs:
+ echo-data:
+  runs-on: ubuntu-latest
+  steps: 
+   
+   - name: Setup Java JDK
+     uses: actions/setup-java@v4.4.0
+     with:
+   
+       java-version: 17
+   
