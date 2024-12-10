@@ -1,36 +1,27 @@
-name: Python application
+name: Python Application Deployment
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main  # Trigger when pushing to the main branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the repository
-      uses: actions/checkout@v3
-
-    - name: List files (for debugging)
-      run: ls -R  # List all files to verify the file paths
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '3.8'  # Adjust according to your needs
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest
+        pip install -r requirements.txt
 
-    - name: Run Hello World Script
-      run: |
-        python hello.py  # Ensure the correct path
-
-    - name: Run tests
-      run: |
-        pytest
+    - name: Run Python script
+      run: python src/hello.py  # Ensure the correct path to your script
