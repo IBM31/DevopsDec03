@@ -24,4 +24,4 @@ jobs:
         ls -R
 
     - name: Run Python script
-      run:  ls src/
+      run:  ls
