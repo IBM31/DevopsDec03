@@ -1,0 +1,51 @@
+name: Deploy Application
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Set environment variables
+        env:
+          VERSION: v1.2.0
+          STAGING_API_URL: https://staging-api.example.com
+          PRODUCTION_API_URL: https://api.example.com
+        run: |
+          echo "VERSION=$VERSION"
+          echo "STAGING_API_URL=$STAGING_API_URL"
+          echo "PRODUCTION_API_URL=$PRODUCTION_API_URL"
+
+      - name: Print deployment message
+        run: |
+          if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
+            echo "Deploying to Production: $PRODUCTION_API_URL"
+          elif [[ $GITHUB_REF == 'refs/heads/develop' ]]; then
+            echo "Deploying to Staging: $STAGING_API_URL"
+          else
+            echo "Not deploying, branch is neither 'main' nor 'develop'."
+          fi
+
+      # Add further deployment steps (e.g., install dependencies, deploy to a server, etc.)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run deployment script
+        run: |
+          # Here you can add the actual deployment commands like pushing to the production/staging server
+          echo "Deploying version $VERSION"
