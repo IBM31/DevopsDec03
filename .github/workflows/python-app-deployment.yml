@@ -24,4 +24,4 @@ jobs:
         ls -R
 
     - name: Run Python script
-      run: python hello.py  # Adjust path to your script if needed
+      run: python src/hello.py
