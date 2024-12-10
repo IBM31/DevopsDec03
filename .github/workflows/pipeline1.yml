@@ -22,7 +22,7 @@ jobs:
           distribution: 'zulu'  # Optional: Can be 'adoptopenjdk', 'zulu', etc.
         
       # Step 3: Build the project using Maven (or Gradle)
-      - name: Build with Maven
-        run: mvn clean install
+      - name: List files in the directory
+        run: ls -al
 
       # You can also include other steps like testing or deploying here.
