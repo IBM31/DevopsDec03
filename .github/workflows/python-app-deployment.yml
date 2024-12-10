@@ -1,46 +1,36 @@
-name: Python Application Deployment
+name: Python application
 
-# Trigger the workflow on push or pull request events to the main branch
 on:
   push:
-    branches:
-      - main  # Trigger when pushing to the main branch
+    branches: [main]
   pull_request:
-    branches:
-      - main  # Trigger when opening pull requests to the main branch
+    branches: [main]
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the repository
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+    - name: Check out the repository
+      uses: actions/checkout@v3
 
-    # Step 2: Set up Python environment
+    - name: List files (for debugging)
+      run: ls -R  # List all files to verify the file paths
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.8'  # Specify your Python version here
+        python-version: '3.9'
 
-    # Step 3: Install dependencies
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Install dependencies from requirements.txt
+        pip install pytest
 
-    # Step 4: Run tests (optional but recommended)
+    - name: Run Hello World Script
+      run: |
+        python hello.py  # Ensure the correct path
+
     - name: Run tests
       run: |
-        pytest  # Or any other testing framework (e.g., unittest, nose)
-
-    # Step 5: Deploy application (example for deploying to Heroku)
-    - name: Deploy to Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}  # Set up the Heroku API key as a secret in GitHub
-      run: |
-        # Add Heroku remote
-        git remote add heroku https://git.heroku.com/your-app-name.git  # Replace 'your-app-name' with your actual Heroku app name
-        # Push to Heroku
-        git push heroku main  # Deploy your app to Heroku
+        pytest
