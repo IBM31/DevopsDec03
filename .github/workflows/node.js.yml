@@ -23,24 +23,11 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: |
-          cd /path/to/your/project  # Navigate to the correct folder (adjust path)
+          cd app  # Navigate to the correct folder (adjust path)
           npm install
 
       # Run tests
       - name: Run tests
         run: |
-          cd /path/to/your/project  # Ensure you're in the correct folder
+          cd app  # Ensure you're in the correct folder
           npm test
-
-      # Deploy to production (use SSH or other methods)
-      - name: Deploy to production
-        uses: appleboy/ssh-action@v0.0.8
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /var/www/html  # Navigate to the correct directory
-            git pull origin main
-            npm install
-            npm start
