@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v4.4.0
         with:
           java-version: '11'  # You can specify other versions like 8, 17, etc.
-          distribution: 'adoptopenjdk'  # Optional: Can be 'adoptopenjdk', 'zulu', etc.
+          distribution: 'zulu'  # Optional: Can be 'adoptopenjdk', 'zulu', etc.
         
       # Step 3: Build the project using Maven (or Gradle)
       - name: Build with Maven
