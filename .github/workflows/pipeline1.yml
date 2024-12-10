@@ -1,17 +1,28 @@
-name: First Workflow
-on:
- push:
+name: Java CI
 
- workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
 
 jobs:
- echo-data:
-  runs-on: ubuntu-latest
-  steps: 
-   
-   - name: Setup Java JDK
-     uses: actions/setup-java@v4.4.0
-     with:
-   
-       java-version: 17
-   
+  build:
+    runs-on: ubuntu-latest  # You can choose other operating systems like windows-latest or macos-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Java using actions/setup-java
+      - name: Set up Java 11
+        uses: actions/setup-java@v4.4.0
+        with:
+          java-version: '11'  # You can specify other versions like 8, 17, etc.
+          distribution: 'adoptopenjdk'  # Optional: Can be 'adoptopenjdk', 'zulu', etc.
+        
+      # Step 3: Build the project using Maven (or Gradle)
+      - name: Build with Maven
+        run: mvn clean install
+
+      # You can also include other steps like testing or deploying here.
