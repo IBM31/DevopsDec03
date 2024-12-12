@@ -15,10 +15,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: false
           fetch-depth: 0
-        env:
-          GITHUB_ACTIONS_VERBOSE: true
-          ACTIONS_STEP_DEBUG: true
-
       - name: Run script
         run: |
           echo "Running script..."
