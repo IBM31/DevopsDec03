@@ -1,16 +1,30 @@
-name: Example Workflow
+Workflow File
 
-on: [push]
+name: CI
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  run_script:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 0
+        env:
+          GITHUB_ACTIONS_VERBOSE: true
+          ACTIONS_STEP_DEBUG: true
 
-    - name: Set execute permissions for script.sh
-      run: chmod +x ./path/to/script.sh  # Adjust path if necessary
+          - name: Make script executable
+            run: chmod +x ./script.sh  # Ensure the script is executable
 
-    - name: Run script.sh
-      run: ./path/to/script.sh  # Adjust path if necessary
+      - name: Run script
+        run: |
+          echo "Running script..."
+          ./script.sh
