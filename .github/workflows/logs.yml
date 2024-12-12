@@ -1,22 +1,16 @@
-name: CI
+name: Example Workflow
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
-  build:
+  run_script:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          persist-credentials: false
-          fetch-depth: 0
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Run script
-        run: |
-          echo "Running script..."
-          ./script.sh
+    - name: Set execute permissions for script.sh
+      run: chmod +x ./path/to/script.sh  # Adjust path if necessary
+
+    - name: Run script.sh
+      run: ./path/to/script.sh  # Adjust path if necessary
