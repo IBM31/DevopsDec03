@@ -25,5 +25,5 @@ jobs:
       - name: Run script
         run: ls -l script.sh
           echo "Running script..."
-          chmod +x /path/to/script.sh
+          chmod +x ./subdirectory/script.sh
           ./script.sh
