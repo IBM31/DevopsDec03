@@ -10,20 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Use the latest version of the checkout action
+        uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: false
           fetch-depth: 0
-        env:
-          GITHUB_ACTIONS_VERBOSE: true
-          ACTIONS_STEP_DEBUG: true
-
-      - name: Make script executable
-        run: chmod +x ./script.sh  # Ensure the script is executable
 
       - name: Run script
-        run: ls -l script.sh
+        run: |
           echo "Running script..."
-          chmod +x ./subdirectory/script.sh
+          chmod +x script.sh
           ./script.sh
