@@ -1,33 +1,25 @@
-name: Node.js CI/CD
+name: CI
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 0
+        env:
+          GITHUB_ACTIONS_VERBOSE: true
+          ACTIONS_STEP_DEBUG: true
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm test
-
-    - name: Deploy to production
-      run: npm run deploy
-      env:
-        DEPLOY_API_KEY: ${{ secrets.DEPLOY_API_KEY }}
+      - name: Run script
+        run: |
+          echo "Running script..."
+          ./script.sh
